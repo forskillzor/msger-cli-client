@@ -1,8 +1,10 @@
 'use strict'
 
-const service = require('./chat-service')
+let service = require('./chat-service')
 
-const income = (msg) => { console.log(msg) };
+const income = (msg) => {
+  console.log(`${msg.from}: ${msg.payload.message}`)
+};
 
 service.registerCallback(income);
 
@@ -18,6 +20,5 @@ process.stdin.on('data', (str) => {
 
   }
   str = JSON.stringify(msg)
-  console.log(str)
   service.send(str)
 });
